@@ -1,0 +1,17 @@
+glasnye = "yaoeiu"
+s = input("Введите строку: ").replace(" ", "")
+
+quantityGlas = 0
+
+for char in s:
+    if char in glasnye:
+        quantityGlas += 1
+
+soglas = len(s) - quantityGlas
+
+if quantityGlas > soglas:
+    print("Да")
+elif quantityGlas == soglas:
+    print("Одинаково")
+else:
+    print("Нет")

@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> nums = new List<int>();
+        Console.WriteLine("Enter the quantity of numbers: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.WriteLine("Element: ");
+            int elem = Convert.ToInt32(Console.ReadLine());
+            int revElem = 0;
+            while (elem > 0)
+            {
+                revElem = revElem * 10 + elem % 10;
+                elem = elem / 10;
+            }
+            nums.Add(revElem);
+        }
+
+        foreach (var elems in nums)
+        {
+            Console.Write(elems + " ");
+        }
+    }
+}

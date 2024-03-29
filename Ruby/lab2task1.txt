@@ -1,0 +1,24 @@
+glasnye = "yaoeiu"
+puts "Введите строку:"
+s = gets.chomp
+s.gsub!(/\s+/, '') # Remove spaces
+
+quantity_glas = 0
+
+s.each_char do |c|
+  glasnye.each_char do |vowel|
+    if c == vowel
+      quantity_glas += 1
+    end
+  end
+end
+
+soglas = s.length - quantity_glas
+
+if quantity_glas > soglas
+  puts "Да"
+elsif quantity_glas == soglas
+  puts "Одинаково"
+else
+  puts "Нет"
+end

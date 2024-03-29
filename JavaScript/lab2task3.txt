@@ -1,0 +1,39 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+let nums = [];
+let n;
+
+rl.question('Введите количество символов: ', (answer) => {
+    n = parseInt(answer);
+    getElements(0);
+});
+
+function getElements(index) {
+    if (index < n) {
+        rl.question('Элемент: ', (answer) => {
+            let elem = parseInt(answer);
+            let revElem = 0;
+            while (elem > 0) {
+                revElem = revElem * 10 + elem % 10;
+                elem = Math.floor(elem / 10);
+            }
+            nums.push(revElem);
+            
+            getElements(index + 1);
+        });
+    } else {
+        rl.close();
+        displayElements();
+    }
+}
+
+function displayElements() {
+    nums.forEach(elem => {
+        console.log(elem + " ");
+    });
+}

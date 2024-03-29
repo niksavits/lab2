@@ -1,0 +1,31 @@
+import Foundation
+
+var s = ""
+let glasnye = "yaoeiu"
+
+print("Введите строку: ", terminator: "")
+if let inputString = readLine() {
+    for c in inputString {
+        if c != " " {
+            s.append(c)
+        }
+    }
+}
+
+var quantityGlas = 0
+
+for char in s {
+    if glasnye.contains(char) {
+        quantityGlas += 1
+    }
+}
+
+let soglas = s.count - quantityGlas
+
+if quantityGlas > soglas {
+    print("Да")
+} else if quantityGlas == soglas {
+    print("Одинаково")
+} else {
+    print("Нет")
+}

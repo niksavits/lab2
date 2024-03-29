@@ -1,0 +1,14 @@
+print(Введите количество символов )
+n = int(input())
+nums = []
+for i in range(n)
+    print(Элемент )
+    elem = int(input())
+    revElem = 0
+    while elem  0
+        revElem = revElem  10 + elem % 10
+        elem = elem  10
+    nums.append(revElem)
+
+for elem in nums
+    print(elem, end= )

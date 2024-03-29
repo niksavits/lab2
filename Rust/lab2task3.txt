@@ -1,0 +1,29 @@
+use std::io;
+
+fn main() {
+    let mut nums: Vec<i32> = Vec::new();
+    println!("Введите количество символов: ");
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Ошибка при чтении строки");
+    let n: i32 = input.trim().parse().expect("Ошибка при парсинге строки в число");
+
+    for _ in 0..n {
+        let mut input = String::new();
+        println!("Элемент: ");
+        io::stdin().read_line(&mut input).expect("Ошибка при чтении строки");
+        let elem: i32 = input.trim().parse().expect("Ошибка при парсинге строки в число");
+        let mut rev_elem = 0;
+        let mut temp_elem = elem;
+        
+        while temp_elem > 0 {
+            rev_elem = rev_elem * 10 + temp_elem % 10;
+            temp_elem = temp_elem / 10;
+        }
+        
+        nums.push(rev_elem);
+    }
+
+    for elem in nums {
+        print!("{} ", elem);
+    }
+}
