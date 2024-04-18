@@ -3,28 +3,50 @@ using System.Collections.Generic;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        List<int> nums = new List<int>();
-        Console.WriteLine("Enter the quantity of numbers: ");
-        int n = Convert.ToInt32(Console.ReadLine());
+        // Устанавливаем культуру для отображения сообщений на английском языке
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
+        // Запрашиваем количество элементов у пользователя
+        Console.Write("Enter the number of elements: ");
+        int n = int.Parse(Console.ReadLine());
+
+        // Создаем список для хранения чисел
+        List<int> nums = new List<int>();
+
+        // Запрашиваем числа у пользователя
+        Console.WriteLine("Enter the numbers:");
         for (int i = 0; i < n; i++)
         {
-            Console.WriteLine("Element: ");
-            int elem = Convert.ToInt32(Console.ReadLine());
-            int revElem = 0;
-            while (elem > 0)
-            {
-                revElem = revElem * 10 + elem % 10;
-                elem = elem / 10;
-            }
-            nums.Add(revElem);
+            int num = int.Parse(Console.ReadLine());
+            nums.Add(num);
         }
 
-        foreach (var elems in nums)
+        // Переменная для подсчета чисел с нечетным количеством цифр
+        int count = 0;
+
+        // Проходим по каждому числу в списке
+        foreach (int num in nums)
         {
-            Console.Write(elems + " ");
+            int digitCount = 0;
+            int temp = num;
+
+            // Подсчитываем количество цифр в числе
+            while (temp != 0)
+            {
+                temp /= 10;
+                digitCount++;
+            }
+
+            // Если количество цифр нечетное, увеличиваем счетчик
+            if (digitCount % 2 != 0)
+            {
+                count++;
+            }
         }
+
+        // Выводим количество чисел с нечетным количеством цифр
+        Console.WriteLine("The number of numbers with an odd number of digits: " + count);
     }
 }

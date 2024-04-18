@@ -1,18 +1,30 @@
-puts "Введите количество символов:"
-n = gets.chomp.to_i
+# Создаем массив для хранения перевернутых чисел
 nums = []
 
-n.times do
-    puts "Элемент:"
-    elem = gets.chomp.to_i
-    rev_elem = 0
-    while elem > 0
-        rev_elem = rev_elem * 10 + elem % 10
-        elem = elem / 10
-    end
-    nums.push(rev_elem)
+# Ввод количества символов
+puts "Введите количество символов: "
+n = gets.chomp.to_i
+
+if n <= 0
+  puts "Ошибка: введено некорректное количество символов."
+  exit(1) # завершаем программу с ошибкой
 end
 
-nums.each do |elem|
-    print elem.to_s + " "
+# Цикл ввода чисел, их переворачивания и добавления в массив
+n.times do
+  print "Элемент: "
+  elem = gets.chomp.to_i
+  rev_elem = 0
+
+  # Переворачиваем число
+  while elem > 0
+    rev_elem = rev_elem * 10 + elem % 10
+    elem = elem / 10
+  end
+
+  nums.push(rev_elem) # добавляем перевернутое число в массив
 end
+
+# Вывод перевернутых чисел
+nums.each { |elem| print "#{elem} " }
+puts

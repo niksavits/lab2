@@ -1,14 +1,53 @@
-const numsToReverse = [123, 456, 789]; // Элементы для инициализации
+// Подключаем модуль для ввода-вывода
+const readline = require('readline');
 
-function reverseNumber(num) {
-    let reversed = 0;
-    while (num > 0) {
-        reversed = reversed * 10 + num % 10;
+// Создаем интерфейс для чтения из стандартного потока ввода
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+// Функция для подсчета количества цифр в числе
+function countDigits(num) {
+    let digitCount = 0;
+    while (num !== 0) {
         num = Math.floor(num / 10);
+        digitCount++;
     }
-    return reversed;
+    return digitCount;
 }
 
-const nums = numsToReverse.map(num => reverseNumber(num));
+// Функция для подсчета количества чисел с нечетным количеством цифр
+function countOddDigitNumbers(nums) {
+    let count = 0;
+    for (let num of nums) {
+        let digitCount = countDigits(num);
+        // Если количество цифр нечетное, увеличиваем счетчик
+        if (digitCount % 2 !== 0) {
+            count++;
+        }
+    }
+    return count;
+}
 
-console.log(nums.join(' '));
+// Запрашиваем количество элементов
+rl.question('Введите количество элементов: ', (n) => {
+    let nums = [];
+
+    // Запрашиваем числа и добавляем их в массив
+    console.log('Введите числа:');
+    rl.on('line', (input) => {
+        nums.push(parseInt(input));
+        // Если в массиве уже n чисел, останавливаем ввод
+        if (nums.length === parseInt(n)) {
+            rl.close();
+        }
+    });
+
+    rl.on('close', () => {
+        // Подсчитываем количество чисел с нечетным количеством цифр
+        let count = countOddDigitNumbers(nums);
+        console.log('Количество чисел с нечетным количеством цифр: ' + count);
+        process.exit(0);
+    });
+});

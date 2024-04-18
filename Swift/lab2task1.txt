@@ -1,31 +1,44 @@
 import Foundation
 
-var s = ""
+// Создаем строку с гласными буквами
 let glasnye = "yaoeiu"
 
+// Ввод строки от пользователя
 print("Введите строку: ", terminator: "")
-if let inputString = readLine() {
-    for c in inputString {
+var s = ""
+if let input = readLine() {
+    for c in input {
         if c != " " {
-            s.append(c)
+            s += String(c)
         }
     }
 }
 
 var quantityGlas = 0
 
+// Подсчет количества гласных букв и согласных букв в строке
 for char in s {
-    if glasnye.contains(char) {
-        quantityGlas += 1
+    if char.isLetter { // Проверка, является ли символ буквой
+        for glas in glasnye {
+            if char.lowercased() == String(glas) {
+                quantityGlas += 1
+            }
+        }
+    } else {
+        print("Некорректный ввод!")
+        break
     }
 }
 
 let soglas = s.count - quantityGlas
 
-if quantityGlas > soglas {
-    print("Да")
-} else if quantityGlas == soglas {
-    print("Одинаково")
-} else {
-    print("Нет")
+// Сравнение количества гласных и согласных букв
+if quantityGlas != 0 {
+    if quantityGlas > soglas {
+        print("Да")
+    } else if quantityGlas == soglas {
+        print("Одинаково")
+    } else {
+        print("Нет")
+    }
 }

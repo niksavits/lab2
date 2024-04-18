@@ -1,0 +1,58 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Устанавливаем кодовую страницу консоли для поддержки русского языка
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        // Создаем строку с гласными буквами
+        string glasnye = "yaoeiu";
+
+        // Ввод строки от пользователя и удаление пробелов
+        Console.Write("Введите строку: ");
+        string s = Console.ReadLine().Replace(" ", "");
+
+        int quantityGlas = 0;
+
+        // Подсчет количества гласных и согласных букв в строке
+        foreach (char ch in s)
+        {
+            if (Char.IsLetter(ch)) // Проверка, является ли символ буквой
+            {
+                foreach (char glas in glasnye)
+                {
+                    if (Char.ToLower(ch) == glas) // Сравниваем символ с гласными
+                    {
+                        quantityGlas++; // Увеличиваем счетчик гласных
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Некорректный ввод!"); // Выводим сообщение об ошибке
+                return; // Завершаем программу
+            }
+        }
+
+        int soglas = s.Length - quantityGlas; // Вычисляем количество согласных
+
+        // Сравнение количества гласных и согласных букв и вывод результата
+        if (quantityGlas != 0)
+        {
+            if (quantityGlas > soglas)
+            {
+                Console.WriteLine("Да");
+            }
+            else if (quantityGlas == soglas)
+            {
+                Console.WriteLine("Одинаково");
+            }
+            else
+            {
+                Console.WriteLine("Нет");
+            }
+        }
+    }
+}

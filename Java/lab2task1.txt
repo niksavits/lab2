@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Создаем строку с гласными буквами
+        String glasnye = "yaoeiu";
+
+        // Создаем объект Scanner для ввода данных
+        Scanner scanner = new Scanner(System.in);
+
+        // Ввод строки от пользователя
+        System.out.print("Введите строку: ");
+        String s = "";
+        String input = scanner.nextLine().replaceAll(" ", "");
+
+        // Удаление пробелов из вводимой строки
+        for (char c : input.toCharArray()) {
+            if (c != ' ') {
+                s += c;
+            }
+        }
+
+        int quantityGlas = 0;
+
+        // Подсчет количества гласных букв и согласных букв в строке
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isLetter(ch)) { // Проверка, является ли символ буквой
+                for (int j = 0; j < glasnye.length(); j++) {
+                    if (Character.toLowerCase(ch) == glasnye.charAt(j)) {
+                        quantityGlas++;
+                    }
+                }
+            } else {
+                System.out.println("Некорректный ввод!");
+                return;
+            }
+        }
+
+        int soglas = s.length() - quantityGlas;
+
+        // Сравнение количества гласных и согласных букв
+        if (quantityGlas != 0) {
+            if (quantityGlas > soglas) {
+                System.out.println("Да");
+            } else if (quantityGlas == soglas) {
+                System.out.println("Одинаково");
+            } else {
+                System.out.println("Нет");
+            }
+        }
+    }
+}

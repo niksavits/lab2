@@ -1,20 +1,45 @@
-var nums: [Int] = []
-print("Введите количество символов: ", terminator: "")
-if let n = Int(readLine() ?? "") {
+import Foundation
+
+// Устанавливаем региональные настройки для вывода сообщений на русском языке
+setlocale(LC_ALL, "Russian")
+
+// Создаем пустой массив для хранения чисел
+var nums = [Int]()
+
+// Запрашиваем количество элементов у пользователя
+print("Введите количество элементов:")
+// Считываем ввод пользователя и преобразуем в Int
+if let input = readLine(), let n = Int(input) {
+    // Выводим приглашение для ввода чисел
+    print("Введите числа:")
+    
+    // Считываем n чисел, введенных пользователем, и добавляем их в массив
     for _ in 0..<n {
-        print("Элемент: ", terminator: "")
-        if let elem = Int(readLine() ?? "") {
-            var revElem = 0
-            var tempElem = elem
-            while tempElem > 0 {
-                revElem = revElem * 10 + tempElem % 10
-                tempElem = tempElem / 10
-            }
-            nums.append(revElem)
+        if let num = readLine(), let number = Int(num) {
+            nums.append(number)
         }
     }
+}
+
+// Переменная для подсчета чисел с нечетным количеством цифр
+var count = 0
+
+// Проходим по каждому числу в массиве
+for num in nums {
+    var digitCount = 0
+    var temp = num
     
-    for elems in nums {
-        print(elems, terminator: " ")
+    // Подсчитываем количество цифр в числе
+    while temp != 0 {
+        temp /= 10
+        digitCount += 1
+    }
+    
+    // Если количество цифр нечетное, увеличиваем счетчик
+    if digitCount % 2 != 0 {
+        count += 1
     }
 }
+
+// Выводим количество чисел с нечетным количеством цифр
+print("Количество чисел с нечетным количеством цифр: \(count)")
