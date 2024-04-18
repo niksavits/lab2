@@ -1,39 +1,43 @@
-const readline = require('readline');
+const readline = require('readline'); // Подключаем модуль readline для взаимодействия с пользователем через консоль
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+const rl = readline.createInterface({ // Создаем интерфейс readline
+    input: process.stdin, // Устанавливаем ввод из стандартного потока ввода
+    output: process.stdout // Устанавливаем вывод в стандартный поток вывода
 });
 
-let nums = [];
-let n;
+let nums = []; // Создаем массив для хранения перевернутых чисел
 
-rl.question('Введите количество символов: ', (answer) => {
-    n = parseInt(answer);
-    getElements(0);
-});
+rl.question('Введите количество символов: ', (n) => { // Задаем вопрос пользователю и ждем ответа
+    n = parseInt(n.trim()); // Преобразуем введенное значение в целое число
 
-function getElements(index) {
-    if (index < n) {
-        rl.question('Элемент: ', (answer) => {
-            let elem = parseInt(answer);
-            let revElem = 0;
-            while (elem > 0) {
-                revElem = revElem * 10 + elem % 10;
-                elem = Math.floor(elem / 10);
-            }
-            nums.push(revElem);
-            
-            getElements(index + 1);
-        });
-    } else {
-        rl.close();
-        displayElements();
+    if (n <= 0 || isNaN(n)) { // Проверяем, является ли введенное значение некорректным
+        console.log("Ошибка: введено некорректное количество символов."); // Выводим сообщение об ошибке
+        rl.close(); // Закрываем интерфейс readline
+        return; // Завершаем программу, если введено некорректное количество символов
     }
-}
+    console.log("Элемент: "); // Выводим приглашение для ввода элементов
+    let count = 0; // Инициализируем счетчик
 
-function displayElements() {
-    nums.forEach(elem => {
-        console.log(elem + " ");
+    rl.on('line', (input) => { // Слушаем событие ввода пользователя
+        console.log("Элемент: "); // Выводим приглашение для ввода следующего элемента
+        let elem = parseInt(input.trim()); // Преобразуем введенное значение в целое число
+
+        let revElem = 0; // Инициализируем переменную для хранения перевернутого числа
+        // Переворачиваем число
+        while (elem > 0) {
+            revElem = revElem * 10 + elem % 10; // Переворачиваем число путем добавления последней цифры
+            elem = Math.floor(elem / 10); // Удаляем последнюю цифру числа
+        }
+        nums.push(revElem); // Добавляем перевернутое число в массив
+        count++; // Увеличиваем счетчик
+
+        if (count === n) { // Проверяем, достигнуто ли заданное количество элементов
+            rl.close(); // Закрываем интерфейс readline
+        }
     });
-}
+
+    rl.on('close', () => { // Слушаем событие закрытия интерфейса readline
+        // Выводим перевернутые числа
+        console.log(nums.join(' ')); // Выводим перевернутые числа через пробел
+    });
+});

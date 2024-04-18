@@ -3,27 +3,42 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        // Создание объекта Scanner для считывания ввода с консоли
         Scanner scanner = new Scanner(System.in);
+        // Создание списка для хранения чисел
         ArrayList<Integer> nums = new ArrayList<>();
-        
-        System.out.println("Введите количество символов: ");
+
+        // Ввод пользователем количества элементов
+        System.out.print("Введите количество элементов: ");
         int n = scanner.nextInt();
-        
-        for (int i = 0; i < n; i++) {
-            System.out.println("Элемент: ");
-            int elem = scanner.nextInt();
-            int revElem = 0;
-            while (elem > 0) {
-                revElem = revElem * 10 + elem % 10;
-                elem = elem / 10;
+
+        // Ввод пользователем чисел и добавление их в список
+        System.out.println("Введите числа:");
+        for (int i = 0; i < n; ++i) {
+            int num = scanner.nextInt();
+            nums.add(num);
+        }
+
+        // Переменная для подсчета количества чисел с нечетным количеством цифр
+        int count = 0;
+        // Перебор всех чисел в списке
+        for (int num : nums) {
+            int digitCount = 0;
+            int temp = num;
+
+            // Подсчет количества цифр в текущем числе
+            while (temp != 0) {
+                temp /= 10;
+                digitCount++;
             }
-            nums.add(revElem);
+
+            // Если количество цифр нечетное, увеличиваем счетчик
+            if (digitCount % 2 != 0) {
+                count++;
+            }
         }
-        
-        for (int elem : nums) {
-            System.out.print(elem + " ");
-        }
-        
-        scanner.close();
+
+        // Вывод количества чисел с нечетным количеством цифр
+        System.out.println("Количество чисел с нечетным количеством цифр: " + count);
     }
 }

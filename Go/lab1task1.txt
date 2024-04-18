@@ -1,0 +1,56 @@
+package main
+
+import (
+	"fmt"
+	"unicode"
+)
+
+func main() {
+	// Создаем строку с гласными буквами
+	glasnye := "yaoeiu"
+
+	// Ввод строки от пользователя
+	fmt.Print("Введите строку: ")
+	var s string
+	var c rune
+	for {
+		// Считываем один символ за раз, пока не нажата клавиша Enter
+		fmt.Scanf("%c", &c)
+		if c == '\n' {
+			break
+		}
+		if c != ' ' {
+			// Добавляем символ к строке s, если он не является пробелом
+			s += string(c)
+		}
+	}
+
+	quantityGlas := 0
+
+	// Подсчет количества гласных букв и согласных букв в строке
+	for _, char := range s {
+		if unicode.IsLetter(char) { // Проверка, является ли символ буквой
+			for _, glas := range glasnye {
+				if unicode.ToLower(char) == glas {
+					quantityGlas++
+				}
+			}
+		} else {
+			fmt.Println("Некорректный ввод!")
+			return
+		}
+	}
+
+	soglas := len(s) - quantityGlas
+
+	// Сравнение количества гласных и согласных букв
+	if quantityGlas != 0 {
+		if quantityGlas > soglas {
+			fmt.Println("Да")
+		} else if quantityGlas == soglas {
+			fmt.Println("Одинаково")
+		} else {
+			fmt.Println("Нет")
+		}
+	}
+}

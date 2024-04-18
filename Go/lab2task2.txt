@@ -1,28 +1,46 @@
 package main
 
 import (
- "fmt"
+    "fmt"
 )
 
 func main() {
- var nums []int
- var n int
- fmt.Println("Введите количество символов: ")
- fmt.Scan(&n)
+    // Запрашиваем количество элементов у пользователя
+    fmt.Print("Введите количество элементов: ")
+    var n int
+    fmt.Scan(&n)
 
- for i := 0; i < n; i++ {
-  var elem, revElem int
-  fmt.Println("Элемент: ")
-  fmt.Scan(&elem)
+    // Создаем слайс для хранения чисел
+    nums := make([]int, 0)
 
-  for elem > 0 {
-   revElem = revElem*10 + elem%10
-   elem = elem / 10
-  }
-  nums = append(nums, revElem)
- }
+    // Запрашиваем числа у пользователя
+    fmt.Println("Введите числа:")
+    for i := 0; i < n; i++ {
+        var num int
+        fmt.Scan(&num)
+        nums = append(nums, num)
+    }
 
- for _, elems := range nums {
-  fmt.Print(elems, " ")
- }
+    // Переменная для подсчета чисел с нечетным количеством цифр
+    count := 0
+
+    // Проходим по каждому числу в слайсе
+    for _, num := range nums {
+        digitCount := 0
+        temp := num
+
+        // Подсчитываем количество цифр в числе
+        for temp != 0 {
+            temp /= 10
+            digitCount++
+        }
+
+        // Если количество цифр нечетное, увеличиваем счетчик
+        if digitCount%2 != 0 {
+            count++
+        }
+    }
+
+    // Выводим количество чисел с нечетным количеством цифр
+    fmt.Println("Количество чисел с нечетным количеством цифр:", count)
 }

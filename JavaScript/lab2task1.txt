@@ -1,0 +1,45 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+// Создаем строку с гласными буквами
+const glasnye = "yaoeiu";
+
+// Запрашиваем ввод строки от пользователя
+rl.question('Введите строку: ', (input) => {
+    let s = input.replace(/\s/g, ''); // Удаляем пробелы из введенной строки
+
+    let quantityGlas = 0;
+
+    // Подсчет количества гласных букв и согласных букв в строке
+    for (let i = 0; i < s.length; i++) {
+        if (s[i].match(/[a-zA-Z]/)) { // Проверка, является ли символ буквой
+            for (let j = 0; j < glasnye.length; j++) {
+                if (s[i].toLowerCase() === glasnye[j]) {
+                    quantityGlas++;
+                }
+            }
+        } else {
+            console.log("Некорректный ввод!");
+            break;
+        }
+    }
+
+    let soglas = s.length - quantityGlas;
+
+    // Сравнение количества гласных и согласных букв
+    if (quantityGlas > 0) {
+        if (quantityGlas > soglas) {
+            console.log("Да");
+        } else if (quantityGlas === soglas) {
+            console.log("Одинаково");
+        } else {
+            console.log("Нет");
+        }
+    }
+    
+    rl.close();
+});
