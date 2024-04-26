@@ -2,6 +2,8 @@ glasnye = "yaoeiu"
 
 s = input("Введите строку: ")
 
+s = ''.join(filter(str.isalpha, s))
+
 quantityGlas = 0
 
 for char in s:
